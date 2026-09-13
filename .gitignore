@@ -1,0 +1,20 @@
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+*~
+
+# KiCad generated/back-up files
+*-backups/
+*.bak
+*.bck
+*.kicad_prl
+*.lck
+*.lck~
+fp-info-cache
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
