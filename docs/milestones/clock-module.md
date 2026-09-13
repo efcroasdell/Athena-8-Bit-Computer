@@ -119,4 +119,4 @@ Controlled tests should include:
 
 ## Current state
 
-556 pins 1 through 9 have been systematically checked. Pins 8 and 9 have been verified in both idle and triggered states. Verification resumes at pin 10.
+556 pins 1 through 12 have been systematically checked. Pins 8, 9 and 12 have been verified in both idle and triggered states. Pins 13 and 14 remain to be verified; the next pin is 13 (DISCHARGE2). Pin verification is currently paused while the migration records are checked.

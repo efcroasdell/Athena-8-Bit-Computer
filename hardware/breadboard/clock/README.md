@@ -135,11 +135,14 @@ Confirmed so far:
 - 556 Timer 1 astable operation and timing-node behaviour
 - 556 Timer 2 pin 8 active-LOW trigger behaviour
 - 556 Timer 2 pin 9 idle LOW state and triggered HIGH pulse
+- 556 Timer 2 pin 10 steady HIGH reset input
+- 556 Timer 2 pin 11 steady control/reference level
+- 556 Timer 2 pin 12 idle timing-node level and triggered exponential charge followed by rapid discharge
 - SN7400 RUN/MANUAL latch operation
 - SN7400 HLT gating behaviour
 - SN74LS157 enable state and SELECT input operation
 
-Systematic pin-by-pin 556 verification is in progress. The current sequence has verified pins 1 through 9, with pins 8 and 9 checked in both idle and triggered states.
+Systematic pin-by-pin 556 verification has reached pin 12, with pins 8, 9 and 12 checked in both idle and triggered states. Pins 13 and 14 remain to be verified; the next pin is 13 (DISCHARGE2). Pin verification is currently paused while the migration records are checked.
 
 ## Evidence and measurement record
 
