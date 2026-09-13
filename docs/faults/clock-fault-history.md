@@ -76,6 +76,56 @@ Scope verification confirmed the intended HIGH → LOW → HIGH trigger waveform
 
 The important diagnostic result was not merely the final wiring. The trigger input was proved independently before the switch was treated as part of the circuit. This prevented a mechanical-contact assumption from being mistaken for an IC fault.
 
+## Timer 2 timing resistor error — pin 12 investigation
+
+### Symptom
+
+During systematic verification of Timer 2, pin 12 (THRESHOLD2) did not show the expected monostable timing-capacitor ramp. The trace appeared square-like rather than showing an exponential rise towards approximately two-thirds of VCC followed by rapid discharge.
+
+Changing the timing capacitor from **1 µF to 10 µF** did not initially produce the expected visible ramp. Removing the capacitor also failed to produce behaviour consistent with the assumed 1 MΩ timing network.
+
+### Isolation
+
+With power removed, continuity checks established that the physical timing node was correctly connected:
+
+- capacitor positive node → pin 12: continuity confirmed;
+- capacitor positive node → pin 13: continuity confirmed.
+
+The resistance from the joined pins-12/13 timing node to +5 V was then measured directly.
+
+Expected: approximately **1 MΩ**.
+
+Measured: approximately **0.9943 kΩ**, about **994 Ω**.
+
+A roughly **1 kΩ** resistor had been fitted where the monostable required **1 MΩ**.
+
+### Causal chain
+
+With 1 kΩ and 1 µF:
+
+`RC ≈ 1 ms`
+
+and the nominal monostable interval is only about:
+
+`1.1 × RC ≈ 1.1 ms`.
+
+At the scope timebase previously in use, approximately **100 ms/div**, that charging interval was effectively instantaneous on screen and therefore appeared as a square transition rather than a visible capacitor ramp.
+
+The incorrect resistor was replaced with **1 MΩ**.
+
+The expected pin-12 waveform then appeared immediately:
+
+- timing node near 0 V at rest;
+- exponential rise after trigger;
+- peak around **3.20 V**, consistent with the upper threshold region;
+- rapid return to approximately 0 V when the threshold comparator reset the latch and the discharge transistor turned on.
+
+### Lesson
+
+When a measured waveform contradicts a well-established model, verify the physical component values and node connectivity before inventing a new explanation for the behaviour.
+
+Informal reminder retained from the session: **“pay attention, Eddie!”**
+
 ## Breadboard-image interpretation caution
 
 During diagnosis, visual inspection of photographs repeatedly risked introducing false assumptions about which rail or switch terminal was electrically connected.
@@ -115,4 +165,4 @@ The individual-555 implementation has been superseded by the current dual-556 pl
 
 ## Status
 
-No unresolved fault currently prevents continued systematic verification of the 556. The next measurement work begins at pin 10.
+No unresolved fault currently prevents continued systematic verification of the 556. Verification is complete through pin 12; the next measurement is pin 13 (DISCHARGE2).
