@@ -1,6 +1,8 @@
 # Athena Chat Migration Handover — 2026-09-13
 
-Status: **current handover for starting a fresh ChatGPT conversation**
+Status: **current handover for starting a fresh Athena companion conversation**
+
+Updated: **14 September 2026**. Original filename retained for existing links.
 
 This document captures the current Athena project state after the previous conversation became unreliable. Treat this file together with the repository itself as the authoritative starting context for a new conversation.
 
@@ -219,22 +221,23 @@ After fitting the correct 1 MΩ resistor, the expected exponential pin-12 timing
 
 This belongs in the fault history, not in the clean pin-verification journal.
 
-## Next measurement
+## Verification state — updated 14 September 2026
 
-The next systematic measurement is:
+The learning journal, `evidence/test-results/Athena Clock Module — Learning and Verification Journal.docx`, now documents **556 pins 1–14**. Pin 13 (DISCHARGE2) and pin 14 (VCC) are recorded as behaving correctly.
 
-**Pin 13 — DISCHARGE2**
+Pin 13's recorded waveform agrees with the pin-12 observation at the shared timing node. Its distinct internal role is the discharge-transistor connection.
 
-Pins 12 and 13 are externally the same timing node, so the external voltage waveform should be similar. The explanation for pin 13 must focus on its distinct internal role: connection to the internal discharge transistor.
+Pin 14 is recorded at Vmin ≈ **4.720 V**, Vmax ≈ **5.040 V**, Vpp ≈ **320 mV**, essentially flat near +5 V with brief variations. The readings alone do not establish the source of those variations.
 
-Expected internal sequence:
+The older `docs/measurements/clock-556-verification.md` and `docs/milestones/clock-module.md` still stop at pin 12 and require reconciliation with the journal. Their remaining-pin statements are stale; they must not cause completed work to be repeated. Full clock-module acceptance remains outstanding.
 
-- idle: discharge transistor ON, timing node held near ground;
-- trigger: discharge transistor turns OFF, capacitor charges;
-- threshold reached: latch resets;
-- discharge transistor turns ON again, rapidly returning the timing node to ground.
+## Immediate continuation point
 
-Do not write observed values until a fresh pin-13 scope capture has been supplied.
+The latest companion discussion concerned schematic presentation: U3 has the component value `74LS157`, but lacks a separate large section heading matching TIMER 1, TIMER 2 and SN7400 A/B or C/D. The previous answer confused the component value with that heading.
+
+Proposed heading: **SN74LS157 — CLOCK SOURCE SELECTOR**, using the same size and style as the other section headings. This remains an outstanding drawing change, not a completed edit.
+
+The next bench phase is the planned recheck of the full latch/selector/HLT/output path, one measurement or connection at a time. Do not restart pin-13 verification merely because an older handover says it is next. Do not treat schematic connectivity or ERC as proof of physical wiring, loading, timing or glitch-free switching.
 
 ## SN7400 current functions
 
@@ -292,25 +295,28 @@ Hierarchical clock sheet:
 
 `Clock.kicad_sch`
 
-The Clock sheet currently contains:
+The Clock sheet now contains both halves of U1 (RS 305-838 / NE556), all five units of U2 (TI SN7400), U3 (TI SN74LS157N), both timing networks, STEP and RUN/MANUAL controls, HLT gating and the two required LEDs. Signal paths are continuously wired; explicit +5 V and ground symbols denote common rails. PWR_FLAG is an ERC annotation, not a physical component.
 
-- NE556 units A and B;
-- SN7400 units A, B, C, D and power unit E;
-- SN74LS157;
-- +5 V and GND symbols;
-- `R1 = 1k`;
-- `RV1 = 1M`;
-- `C1 = 1uF`, polarised.
+Exports:
 
-Planned IC references:
+- `hardware/kicad/Athena/exports/Athena-clock.pdf` — complete clock drawing on one A3 page;
+- `hardware/kicad/Athena/exports/Clock-erc.txt` — recorded ERC result: **0 errors, 1 warning**, for the CPU_CLK label connected only to the module output pin.
 
-- U1 = NE556;
-- U2 = SN7400;
-- U3 = SN74LS157.
+The schematic README records a check of all 44 IC pins in the exported netlist. These are drawing checks, not proof of physical loading, timing or glitch-free operation.
 
-The KiCad work was interrupted because the previous conversation repeatedly gave incorrect or unverified UI instructions. In a new conversation, do **not** trust remembered menu paths from the old thread. Verify every KiCad 10.0.3 macOS command or menu path against current documentation or the user's screenshot before instructing.
+Details still requiring confirmation:
 
-The schematic should be deliberately arranged before extensive wiring. Avoid long tangled wires; use short local wiring and meaningful net labels where appropriate.
+- R4/R5: fitted RUN/MANUAL pull-up resistances;
+- R7/R8: fitted HLT and astable LED series resistances;
+- D2: complete wiring/polarity; U1 pin 5 is the confirmed signal, return to GND is provisional;
+- RV1: whether the unused end is open or strapped to the wiper;
+- SW2: physical contact numbering and switch type;
+- C3/C4/C5: fitted presence and values of local supply bypass capacitors;
+- U3 unused data inputs: grounded in the schematic, actual breadboard connections still to be checked.
+
+U1 control pins 3 and 11 remain externally unconnected in the drawing. Optional control bypass capacitors are not shown as fitted. Footprints and PCB layout remain undecided. The schematic is not yet a definitive as-built record or final build specification.
+
+See `hardware/kicad/Athena/README.md` for current connection and verification details. Verify KiCad 10.0.3 macOS commands against current documentation or the actual UI before giving instructions.
 
 ## Journal format
 
@@ -355,4 +361,4 @@ Do not repeat these failures:
 - bundling several diagnostic actions when one was requested;
 - treating broad electronics interests as disconnected.
 
-The next technical continuation point is pin 13 of the 556.
+Resume from the immediate continuation point above; consult the current journal and schematic README before relying on older progress summaries.
