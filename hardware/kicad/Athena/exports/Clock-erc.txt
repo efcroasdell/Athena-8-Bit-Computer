@@ -1,0 +1,17 @@
+ERC report (2026-09-14T09:38:25, Encoding UTF8)
+Report includes: Errors, Warnings
+
+***** Sheet /
+[isolated_pin_label]: Label connected to only one pin
+    ; warning
+    @(388.62 mm, 203.20 mm): Global Label 'CPU_CLK'
+
+***** Sheet /Clock/
+
+ ** ERC messages: 1  Errors 0  Warnings 1
+
+ ** Ignored checks:
+    - Global label only appears once in the schematic
+    - Four connection points are joined together
+    - SPICE model issue
+    - Assigned footprint doesn't match footprint filters
