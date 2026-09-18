@@ -1,0 +1,706 @@
+(kicad_sch
+  (version 20260306)
+  (generator eeschema)
+  (generator_version "10.0")
+  (uuid "7a5e22fe-793b-4ad5-a92c-cc893295747a")
+  (paper "A4")
+  (title_block
+    (title "Athena clock logic")
+    (date "2026-09-14")
+    (rev "1"))
+  (lib_symbols)
+  (text "ATHENA — CLOCK LOGIC"
+    (at 148.5 20 0)
+    (effects
+      (font
+        (size 2.54 2.54)))
+    (uuid "a88fff9a-8d59-441a-aa33-ee2a83bf2958"))
+  (text "Functional signal flow; pin references correspond to Clock.kicad_sch"
+    (at 148.5 27 0)
+    (effects
+      (font
+        (size 1.524 1.524)))
+    (uuid "ba773ee2-83f4-42e7-97e1-c5516c8b8c23"))
+  (polyline
+    (pts
+      (xy 25 40)
+      (xy 78 40)
+      (xy 78 62)
+      (xy 25 62)
+      (xy 25 40))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "b281e272-566a-4baf-b8bc-71aaaec7fd33"))
+  (text "VARIABLE-SPEED ASTABLE\nU1A — 556 Timer 1\nOUTPUT1: pin 5"
+    (at 51.5 51.0 0)
+    (effects
+      (font
+        (size 1.524 1.524)))
+    (uuid "e4f21715-c47c-43ba-a5be-a9891817b734"))
+  (polyline
+    (pts
+      (xy 25 80)
+      (xy 78 80)
+      (xy 78 102)
+      (xy 25 102)
+      (xy 25 80))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "85c3a9a1-9fd2-40e9-813a-64874b53ce66"))
+  (text "MANUAL STEP PULSE\nU1B — 556 Timer 2\nOUTPUT2: pin 9"
+    (at 51.5 91.0 0)
+    (effects
+      (font
+        (size 1.524 1.524)))
+    (uuid "b2ca2237-8ca5-4f4d-9735-e74825506537"))
+  (polyline
+    (pts
+      (xy 78 51)
+      (xy 99 51)
+      (xy 99 55)
+      (xy 123 55))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "2d59e2a4-c749-42f7-9d86-91562354b71d"))
+  (polyline
+    (pts
+      (xy 121.1579 55.7788)
+      (xy 123 55)
+      (xy 121.1579 54.2212))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "7986f5aa-ca33-451c-bd05-28575cb398bb"))
+  (text "ASTABLE"
+    (at 99 46 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "0ed4d33a-1e37-45d2-b91e-8ef0a27f403b"))
+  (polyline
+    (pts
+      (xy 78 91)
+      (xy 107 91)
+      (xy 107 87)
+      (xy 123 87))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "0e2a4c22-a72b-4c55-ba39-f8f28766c8ce"))
+  (polyline
+    (pts
+      (xy 121.1579 87.7788)
+      (xy 123 87)
+      (xy 121.1579 86.2212))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "1676103a-7257-475c-b7cd-40ace895b4c2"))
+  (text "MANUAL"
+    (at 101 97 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "b8aac6a4-f846-47d0-9c74-80a624bb9aa2"))
+  (polyline
+    (pts
+      (xy 123 42)
+      (xy 150 49)
+      (xy 150 93)
+      (xy 123 100)
+      (xy 123 42))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "16eac0f7-1d8b-4faa-b19c-ec646b05cd2a"))
+  (text "U3\n74LS157\nchannel 1"
+    (at 136.5 68 0)
+    (effects
+      (font
+        (size 1.524 1.524)))
+    (uuid "c9678d7f-b03d-43eb-8156-6b0f1f11738b"))
+  (text "B / pin 3"
+    (at 125 55 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid "b78c0465-ceb2-4f83-8ade-3bcb008e8fe4"))
+  (text "A / pin 2"
+    (at 125 87 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid "2e05fd13-e1ff-4643-9edc-065fa5a5a866"))
+  (text "Y / pin 4"
+    (at 157 79 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "5db20df9-2feb-403d-95b5-4f8d65f57465"))
+  (text "SELECT\npin 1"
+    (at 138 105 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "9ee52191-e500-4a71-95d5-a64f0f696ee2"))
+  (text "Pin 15 = LOW\n(selector enabled)"
+    (at 136 118 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "d1ddd984-dd26-4e36-886a-65210902090c"))
+  (polyline
+    (pts
+      (xy 150 71)
+      (xy 177 71)
+      (xy 177 68)
+      (xy 188 68))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "fb3bbc42-b8ac-45b3-9a10-26e35c7608ca"))
+  (polyline
+    (pts
+      (xy 186.1579 68.7788)
+      (xy 188 68)
+      (xy 186.1579 67.2212))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "7ae35382-20fc-4965-8ff3-91be8d3dc8b5"))
+  (text "SELECTED_CLK"
+    (at 170 60 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "d74d1732-6e41-4dd2-9d26-89ca7622540a"))
+  (polyline
+    (pts
+      (xy 188 65)
+      (xy 196 65)
+      (xy 196.0 65.0)
+      (xy 196.7832 65.0513)
+      (xy 197.5529 65.2044)
+      (xy 198.2961 65.4567)
+      (xy 199.0 65.8038)
+      (xy 199.6526 66.2399)
+      (xy 200.2426 66.7574)
+      (xy 200.7601 67.3474)
+      (xy 201.1962 68.0)
+      (xy 201.5433 68.7039)
+      (xy 201.7956 69.4471)
+      (xy 201.9487 70.2168)
+      (xy 202.0 71.0)
+      (xy 201.9487 71.7832)
+      (xy 201.7956 72.5529)
+      (xy 201.5433 73.2961)
+      (xy 201.1962 74.0)
+      (xy 200.7601 74.6526)
+      (xy 200.2426 75.2426)
+      (xy 199.6526 75.7601)
+      (xy 199.0 76.1962)
+      (xy 198.2961 76.5433)
+      (xy 197.5529 76.7956)
+      (xy 196.7832 76.9487)
+      (xy 196.0 77.0)
+      (xy 188 77)
+      (xy 188 65))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "eaa90624-e823-40e0-8df2-a0c679416e41"))
+  (polyline
+    (pts
+      (xy 205.0 71.0)
+      (xy 204.9712 71.2926)
+      (xy 204.8858 71.574)
+      (xy 204.7472 71.8334)
+      (xy 204.5607 72.0607)
+      (xy 204.3334 72.2472)
+      (xy 204.074 72.3858)
+      (xy 203.7926 72.4712)
+      (xy 203.5 72.5)
+      (xy 203.2074 72.4712)
+      (xy 202.926 72.3858)
+      (xy 202.6666 72.2472)
+      (xy 202.4393 72.0607)
+      (xy 202.2528 71.8334)
+      (xy 202.1142 71.574)
+      (xy 202.0288 71.2926)
+      (xy 202.0 71.0)
+      (xy 202.0288 70.7074)
+      (xy 202.1142 70.426)
+      (xy 202.2528 70.1666)
+      (xy 202.4393 69.9393)
+      (xy 202.6666 69.7528)
+      (xy 202.926 69.6142)
+      (xy 203.2074 69.5288)
+      (xy 203.5 69.5)
+      (xy 203.7926 69.5288)
+      (xy 204.074 69.6142)
+      (xy 204.3334 69.7528)
+      (xy 204.5607 69.9393)
+      (xy 204.7472 70.1666)
+      (xy 204.8858 70.426)
+      (xy 204.9712 70.7074)
+      (xy 205.0 71.0))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "51cbe954-eec1-4dcb-a304-0f5dedf15fc8"))
+  (text "U2C"
+    (at 195 59 0)
+    (effects
+      (font
+        (size 1.524 1.524)))
+    (uuid "7444a282-6a62-48c1-b049-6fc661da9d68"))
+  (text "9"
+    (at 186 66 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "cb7d69b1-d42e-4a23-bf4e-7c4952b0ea99"))
+  (text "10"
+    (at 186 72 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "deabcd7a-3745-4643-a2de-d028d02392f4"))
+  (text "8"
+    (at 208 68 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "cd439286-4d88-4188-ab0b-0ce21a02429a"))
+  (polyline
+    (pts
+      (xy 205 71)
+      (xy 222 71)
+      (xy 222 68)
+      (xy 230 68))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "2dadca1b-4695-4927-9c79-8aea4df93eb9"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 222 74)
+      (xy 230 74))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "ab8b1de0-ad14-4f97-99a3-6bb89ea53022"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 222.6 71.0))
+    (stroke
+      (width 0.2)
+      (type default))
+    (fill
+      (type none))
+    (uuid "9804c2cd-0171-425e-bc3b-cc58383390cc"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 222.5196 71.3))
+    (stroke
+      (width 0.2)
+      (type default))
+    (fill
+      (type none))
+    (uuid "d674624d-10c8-4459-b6e1-7a608be8a0af"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 222.3 71.5196))
+    (stroke
+      (width 0.2)
+      (type default))
+    (fill
+      (type none))
+    (uuid "662057c4-508c-48fd-9286-e26afedf57ce"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 222.0 71.6))
+    (stroke
+      (width 0.2)
+      (type default))
+    (fill
+      (type none))
+    (uuid "2f9aeb60-b3a4-4d71-9bb5-b3c8ef7086ff"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 221.7 71.5196))
+    (stroke
+      (width 0.2)
+      (type default))
+    (fill
+      (type none))
+    (uuid "b970f53d-4d22-4370-b4e6-f56142db5b49"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 221.4804 71.3))
+    (stroke
+      (width 0.2)
+      (type default))
+    (fill
+      (type none))
+    (uuid "4e41fa43-335b-440d-99c5-1f923a55c44e"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 221.4 71.0))
+    (stroke
+      (width 0.2)
+      (type default))
+    (fill
+      (type none))
+    (uuid "6845d9dc-b0db-40ef-b5ec-9ddaf16dbbc0"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 221.4804 70.7))
+    (stroke
+      (width 0.2)
+      (type default))
+    (fill
+      (type none))
+    (uuid "1b99290c-a229-45f0-ae06-e8e036fae2f7"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 221.7 70.4804))
+    (stroke
+      (width 0.2)
+      (type default))
+    (fill
+      (type none))
+    (uuid "ac5d6d82-3cfb-477a-a16c-d24ef46b6862"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 222.0 70.4))
+    (stroke
+      (width 0.2)
+      (type default))
+    (fill
+      (type none))
+    (uuid "aec2ba9b-1d02-4c8d-add1-194dce896e5f"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 222.3 70.4804))
+    (stroke
+      (width 0.2)
+      (type default))
+    (fill
+      (type none))
+    (uuid "604ea2b5-abda-4e24-aafa-473edae10e1c"))
+  (polyline
+    (pts
+      (xy 222 71)
+      (xy 222.5196 70.7))
+    (stroke
+      (width 0.2)
+      (type default))
+    (fill
+      (type none))
+    (uuid "c287dcee-0647-4235-9fc7-073c64cf3f57"))
+  (polyline
+    (pts
+      (xy 230 65)
+      (xy 238 65)
+      (xy 238.0 65.0)
+      (xy 238.7832 65.0513)
+      (xy 239.5529 65.2044)
+      (xy 240.2961 65.4567)
+      (xy 241.0 65.8038)
+      (xy 241.6526 66.2399)
+      (xy 242.2426 66.7574)
+      (xy 242.7601 67.3474)
+      (xy 243.1962 68.0)
+      (xy 243.5433 68.7039)
+      (xy 243.7956 69.4471)
+      (xy 243.9487 70.2168)
+      (xy 244.0 71.0)
+      (xy 243.9487 71.7832)
+      (xy 243.7956 72.5529)
+      (xy 243.5433 73.2961)
+      (xy 243.1962 74.0)
+      (xy 242.7601 74.6526)
+      (xy 242.2426 75.2426)
+      (xy 241.6526 75.7601)
+      (xy 241.0 76.1962)
+      (xy 240.2961 76.5433)
+      (xy 239.5529 76.7956)
+      (xy 238.7832 76.9487)
+      (xy 238.0 77.0)
+      (xy 230 77)
+      (xy 230 65))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "61095193-368c-4eb0-a9b2-59700c7e7c5c"))
+  (polyline
+    (pts
+      (xy 247.0 71.0)
+      (xy 246.9712 71.2926)
+      (xy 246.8858 71.574)
+      (xy 246.7472 71.8334)
+      (xy 246.5607 72.0607)
+      (xy 246.3334 72.2472)
+      (xy 246.074 72.3858)
+      (xy 245.7926 72.4712)
+      (xy 245.5 72.5)
+      (xy 245.2074 72.4712)
+      (xy 244.926 72.3858)
+      (xy 244.6666 72.2472)
+      (xy 244.4393 72.0607)
+      (xy 244.2528 71.8334)
+      (xy 244.1142 71.574)
+      (xy 244.0288 71.2926)
+      (xy 244.0 71.0)
+      (xy 244.0288 70.7074)
+      (xy 244.1142 70.426)
+      (xy 244.2528 70.1666)
+      (xy 244.4393 69.9393)
+      (xy 244.6666 69.7528)
+      (xy 244.926 69.6142)
+      (xy 245.2074 69.5288)
+      (xy 245.5 69.5)
+      (xy 245.7926 69.5288)
+      (xy 246.074 69.6142)
+      (xy 246.3334 69.7528)
+      (xy 246.5607 69.9393)
+      (xy 246.7472 70.1666)
+      (xy 246.8858 70.426)
+      (xy 246.9712 70.7074)
+      (xy 247.0 71.0))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "326e41b3-8a64-45a8-bb77-61841232db9b"))
+  (text "U2D"
+    (at 237 59 0)
+    (effects
+      (font
+        (size 1.524 1.524)))
+    (uuid "0bb2c2a9-64dc-43b1-bff8-81ab6de2b6c6"))
+  (text "12"
+    (at 228 66 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "df5d4f48-ccf3-44d5-b8ca-6a1c115ca220"))
+  (text "13"
+    (at 228 72 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "4183143c-677b-4551-97a4-489ee70d892e"))
+  (text "11"
+    (at 250 68 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "47b9e33d-0807-4528-be5e-dd43d1916617"))
+  (polyline
+    (pts
+      (xy 247 71)
+      (xy 275 71))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "127ff879-f36f-4791-b64e-1014108bfb6a"))
+  (polyline
+    (pts
+      (xy 273.1579 71.7788)
+      (xy 275 71)
+      (xy 273.1579 70.2212))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "d15a68c0-7168-4f2b-8765-799eb6c9c9f9"))
+  (text "CPU_CLK"
+    (at 267 63 0)
+    (effects
+      (font
+        (size 1.524 1.524)))
+    (uuid "02e0c04c-6f84-4781-9f4f-636e6de25f83"))
+  (text "Final CPU clock"
+    (at 266 79 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "b1d7a829-157c-4fe6-b37a-b39a421f15f7"))
+  (polyline
+    (pts
+      (xy 25 131)
+      (xy 106 131)
+      (xy 106 156)
+      (xy 25 156)
+      (xy 25 131))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "87990b39-ca49-4d8c-a53a-2429205e13a7"))
+  (text "RUN / MANUAL MEMORY\nU2A + U2B — cross-coupled NAND latch\nPin 1 LOW: MANUAL; pin 4 LOW: RUN"
+    (at 65.5 143.5 0)
+    (effects
+      (font
+        (size 1.524 1.524)))
+    (uuid "a94f6cbe-df68-4737-884b-dc1cdba5f70d"))
+  (polyline
+    (pts
+      (xy 106 143.5)
+      (xy 161 143.5)
+      (xy 161 110)
+      (xy 143 110)
+      (xy 143 95))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "934f7509-0588-4e47-ada9-fef69f86e827"))
+  (polyline
+    (pts
+      (xy 143.7788 96.8421)
+      (xy 143 95)
+      (xy 142.2212 96.8421))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "e2570b7a-2f53-404e-b23a-46a413576adc"))
+  (text "Q — U2 pin 6"
+    (at 123 150 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "3bdacd89-6bcb-442c-8176-d7c0302e0caa"))
+  (polyline
+    (pts
+      (xy 184 124)
+      (xy 266 124)
+      (xy 266 152)
+      (xy 184 152)
+      (xy 184 124))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "6484d153-f3d5-4e04-aa62-cd8b6f744f23"))
+  (text "HLT CONTROL\nU2 pin 10 = CLOCK_ENABLE\nHLT released: HIGH; halted: LOW"
+    (at 225.0 138.0 0)
+    (effects
+      (font
+        (size 1.524 1.524)))
+    (uuid "5aac31fe-589a-4f00-aba4-4e32a98facea"))
+  (polyline
+    (pts
+      (xy 192 124)
+      (xy 192 112)
+      (xy 182 112)
+      (xy 182 74)
+      (xy 188 74))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "74f12ba1-c011-4b11-9cbc-95edd22963f9"))
+  (polyline
+    (pts
+      (xy 186.1579 74.7788)
+      (xy 188 74)
+      (xy 186.1579 73.2212))
+    (stroke
+      (width 0.254)
+      (type default))
+    (fill
+      (type none))
+    (uuid "a3d2ec05-c579-4747-9396-db8cb463418f"))
+  (text "CLOCK_ENABLE"
+    (at 210 106 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "c6fd51d6-3492-4d0d-9c8d-412766e9842d"))
+  (text "Q = 0: manual STEP selected.     Q = 1: astable selected."
+    (at 25 170 0)
+    (effects
+      (font
+        (size 1.524 1.524))
+      (justify left))
+    (uuid "5e97fb76-2e78-4cb2-8f74-2e2831a3b1cd"))
+  (text "SELECTED_CLK = MANUAL . ~{Q} + ASTABLE . Q"
+    (at 25 178 0)
+    (effects
+      (font
+        (size 1.524 1.524))
+      (justify left))
+    (uuid "6167160e-f9a4-40b1-bfd1-d67fabeb6ac0"))
+  (text "CPU_CLK = SELECTED_CLK . CLOCK_ENABLE"
+    (at 25 186 0)
+    (effects
+      (font
+        (size 1.524 1.524))
+      (justify left))
+    (uuid "39943ede-fab0-46db-9e41-44af2aa06f7b"))
+  (text "HLT active holds CPU_CLK LOW. Indicators and timing components are shown on the circuit sheet."
+    (at 25 194 0)
+    (effects
+      (font
+        (size 1.27 1.27))
+      (justify left))
+    (uuid "cc9619e0-b06c-4a60-80be-7ae522c1c25d"))
+  (embedded_fonts no))

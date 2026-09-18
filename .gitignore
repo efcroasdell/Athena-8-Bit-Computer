@@ -20,3 +20,6 @@ __pycache__/
 venv/
 
 hardware/kicad/Athena/.history/
+
+# Local document backups
+*-BACKUP

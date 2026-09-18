@@ -37,3 +37,7 @@ KiCad **10.0.3** loaded the schematic in the existing Athena hierarchy. ERC repo
 The final PDF was visually inspected. These checks establish the drawing's connectivity and readability, not physical loading, timing or glitch-free operation. The journal contains 556 pin measurements through pin 14; the full selector/output path still requires the planned bench recheck.
 
 The original top-level schematic and existing project settings were retained. Journal content was not edited as part of this work.
+
+## Logic diagram
+
+The **Clock logic** hierarchical sheet (`Clock-logic.kicad_sch`) shows source selection, mode memory, both HLT NAND gates and the Boolean relationships. `exports/Clock-logic.pdf` is its A4 preview. This sheet contains documentation graphics only and is excluded from the BOM, board and simulation. Its U1/U2/U3 annotations refer to the existing physical ICs on the Clock circuit sheet; it adds no duplicate parts or electrical nets.
