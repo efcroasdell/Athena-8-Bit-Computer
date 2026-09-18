@@ -4,6 +4,8 @@ Athena is a practical 8-bit computer build and associated learning, measurement,
 
 This repository is the **authoritative engineering record** for Athena. Chat history may support the work, but established designs, measurements, decisions, experiments, faults, and evidence should be recorded here.
 
+Athena is published as an engineering and learning record. Pull requests and issues are not currently accepted, but discussion and technical questions are welcome via GitHub Discussions.
+
 ## Scope
 
 The repository is intended to hold:
