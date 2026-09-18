@@ -23,3 +23,7 @@ hardware/kicad/Athena/.history/
 
 # Local document backups
 *-BACKUP
+
+# Large video evidence is stored outside Git
+*.mp4
+*.mov
