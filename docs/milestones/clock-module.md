@@ -11,6 +11,8 @@ Produce and verify a complete clock subsystem for Athena that preserves the func
 - RS 305-838 dual 556
   - Timer 1: variable-speed astable clock
   - Timer 2: manual monostable STEP pulse
+- TI CD40106BE
+  - RC + Schmitt-trigger conditioning of the mechanical STEP input
 - TI SN7400
   - RUN/MANUAL state latch
   - HLT clock gating
@@ -27,12 +29,13 @@ Produce and verify a complete clock subsystem for Athena that preserves the func
 
 ## Model
 
-The clock module consists of four observable functional stages:
+The clock module consists of five observable functional stages:
 
 1. generation of a free-running clock by the 556 astable timer;
-2. generation of one manual pulse by the 556 monostable timer;
-3. persistent RUN/MANUAL state stored by the SN7400 latch and applied to the SN74LS157 selector;
-4. HLT gating of the selected clock through the remaining SN7400 gates.
+2. RC filtering and Schmitt-trigger conditioning of the mechanical STEP input;
+3. generation of one manual pulse by the 556 monostable timer;
+4. persistent RUN/MANUAL state stored by the SN7400 latch and applied to the SN74LS157 selector;
+5. HLT gating of the selected clock through the remaining SN7400 gates.
 
 The final internal CPU clock is SN7400 pin 11.
 
@@ -44,7 +47,7 @@ The timing capacitor repeatedly charges and discharges between approximately one
 
 ### Manual mode
 
-556 pin 8 is HIGH at rest. Pressing STEP pulls pin 8 LOW, causing pin 9 to produce one HIGH monostable pulse before returning automatically to LOW.
+The STEP switch acts on a 47 kΩ / 100 nF RC node at CD40106B pin 1. Schmitt hysteresis converts the mechanical transition into a clean logic event. A second inverter restores the original polarity so 556 pin 8 is HIGH at rest and receives one clean LOW-going trigger for each valid STEP action. Pin 9 then produces one HIGH monostable pulse before returning automatically to LOW.
 
 ### Selection
 
@@ -62,6 +65,9 @@ The following nodes must remain measurable during this milestone:
 - Timer 1 timing capacitor / threshold / trigger node
 - Timer 1 control reference
 - Timer 1 output
+- mechanical STEP switch
+- CD40106B debounce RC node
+- CD40106B conditioned output
 - Timer 2 trigger
 - Timer 2 output
 - Timer 2 timing node
@@ -88,7 +94,7 @@ The clock milestone is complete when:
 
 - all relevant 556 pins have been measured and documented;
 - astable frequency changes predictably with the speed control;
-- one STEP action produces one manual output pulse;
+- one STEP action produces one clean manual output pulse and one clean final CPU clock event;
 - RUN/MANUAL state is stable and repeatable;
 - source selection is verified at the LS157 input and output pins;
 - HLT reliably suppresses the final clock;
@@ -119,4 +125,16 @@ Controlled tests should include:
 
 ## Current state
 
-556 pins 1 through 12 have been systematically checked. Pins 8, 9 and 12 have been verified in both idle and triggered states. Pins 13 and 14 remain to be verified; the next pin is 13 (DISCHARGE2). Pin verification is currently paused while the migration records are checked.
+**Completed sub-milestone, 19 September 2026:** manual STEP input debouncing and clean single-clock generation verified.
+
+Evidence and checks completed:
+
+- switch chatter traced to the 556 trigger input;
+- a better tactile switch reduced but did not eliminate bounce;
+- a CD40106BE RC + Schmitt-trigger conditioner was derived from the measured failure mechanism and installed;
+- the conditioned trigger was verified by oscilloscope;
+- a retained DSLogic capture showed one clean CPU clock pulse per deliberate STEP action;
+- RUN/MANUAL selector propagation was rechecked at SN74LS157 pin 1, SN74LS157 pin 4, SN7400 pin 9 and SN7400 pin 11;
+- RUN-mode final CPU clock was independently measured at approximately 270.407 kHz during the regression check.
+
+The overall clock milestone remains **in progress** because the formal pin-by-pin 556 record still has pins 13 and 14 to document and the evidence index requires completion.
