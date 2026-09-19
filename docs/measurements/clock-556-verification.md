@@ -180,13 +180,13 @@ The observed lower and upper levels are consistent with the same timing capacito
 
 **What it does:** Pin 8 is the trigger input of Timer 2. Internally it feeds the lower trigger comparator, which compares the external trigger voltage with the lower internal reference, approximately one-third of VCC.
 
-**What is connected to it:** Pin 8 is connected to +5 V through a **10 kΩ pull-up resistor**. The STEP push-button momentarily connects pin 8 directly to GND.
+**What is connected to it:** In the current circuit, pin 8 is driven by **CD40106B pin 4**. The mechanical STEP switch acts on an RC node at CD40106B pin 1 (47 kΩ to +5 V, 100 nF to GND, and 1 kΩ in series with the switch to GND). Two Schmitt inverter stages condition the transition before it reaches pin 8. The earlier direct 10 kΩ pull-up and switch connection is retained below as historical verification evidence, but is no longer the current wiring.
 
 #### STEP button released
 
 **Expected:** Pin 8 should remain HIGH, close to +5 V.
 
-**Why:** With pin 8 above the internal one-third-VCC trigger threshold, the trigger comparator does not set the internal SR latch. Timer 2 therefore remains in its stable state: pin 9 is LOW, the discharge transistor is active, and the timing network is ready for the next trigger. The 10 kΩ resistor prevents the trigger input from floating.
+**Why:** With pin 8 above the internal one-third-VCC trigger threshold, the trigger comparator does not set the internal SR latch. Timer 2 therefore remains in its stable state: pin 9 is LOW, the discharge transistor is active, and the timing network is ready for the next trigger. The current CD40106B output actively defines the trigger input. In the earlier direct-switch configuration, the 10 kΩ pull-up prevented the trigger input from floating.
 
 **Observed:**
 
@@ -372,3 +372,64 @@ Scope captures corresponding to these measurements should be stored under:
 `evidence/oscilloscope/clock/`
 
 Once the original image files are added, each pin entry should link directly to its supporting capture rather than relying on chat history.
+
+
+## 19 September 2026 — STEP debounce verification
+
+### Purpose
+
+Determine why manual STEP operation sometimes produced more than one CPU clock event, implement a hardware correction based on the measured failure mechanism, and verify the correction at both the 556 trigger input and the final CPU clock.
+
+### Pre-correction observation
+
+DSLogic captures showed multiple short clock transitions associated with individual intended STEP actions. Oscilloscope measurements traced the disturbance backwards to 556 pin 8, where several rapid HIGH/LOW transitions were visible around a switch press.
+
+Replacing the original switch with a 6 mm tactile switch reduced the problem substantially but did not eliminate it; a retained capture still showed an additional short CPU-clock pulse.
+
+### Implemented conditioning
+
+A CD40106BE Schmitt-trigger inverter was added with:
+
+- pin 1 → 47 kΩ → +5 V;
+- pin 1 → 100 nF → GND;
+- pin 1 → 1 kΩ → STEP switch → GND;
+- pin 2 → pin 3;
+- pin 4 → 556 pin 8.
+
+Two inverter stages preserve the original active-LOW trigger polarity.
+
+### Oscilloscope result
+
+Dual-channel observation used:
+
+- yellow: CD40106B pin 1, the RC node;
+- blue: 556 pin 8, the conditioned trigger.
+
+Observed:
+
+- the RC node transitions between defined HIGH and LOW levels;
+- the 556 trigger changes cleanly from HIGH to LOW;
+- no visible contact chatter remains at pin 8 at the test timebase.
+
+This verifies the local electrical function of the debounce stage.
+
+### Logic-analyser result
+
+A retained post-debounce DSLogic capture showed deliberate manual STEP actions producing one clean CPU clock pulse each, with no additional short chatter pulses.
+
+**Observed fact:** the implemented RC + CD40106B stage removed the previously visible repeated CPU-clock events in the captured test.
+
+**Acceptance result:** manual STEP input debouncing and clean single-clock generation are verified for the tested configuration.
+
+## 19 September 2026 — RUN/MANUAL propagation recheck
+
+An apparent transient observation suggested that a manual STEP might be propagating while RUN was selected. The clock path was therefore checked stage by stage.
+
+Measured:
+
+- SN74LS157 pin 1 SELECT: **0 V in MANUAL**, approximately **3.6 V in RUN**;
+- SN74LS157 pin 4 selected-clock output: no STEP-correlated change in RUN;
+- SN7400 pin 9: no STEP-correlated change in RUN;
+- SN7400 pin 11 final CPU clock: no STEP-correlated change in RUN.
+
+**Conclusion:** the current selector and final clock-gating path reject the manual STEP source correctly in RUN mode. The earlier observation could not be reproduced after the temporary test wiring had been stabilised.
