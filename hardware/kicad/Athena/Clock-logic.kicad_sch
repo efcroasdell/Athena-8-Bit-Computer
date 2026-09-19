@@ -6,8 +6,8 @@
   (paper "A4")
   (title_block
     (title "Athena clock logic")
-    (date "2026-09-14")
-    (rev "1"))
+    (date "2026-09-19")
+    (rev "2"))
   (lib_symbols)
   (text "ATHENA — CLOCK LOGIC"
     (at 148.5 20 0)
@@ -53,7 +53,7 @@
     (fill
       (type none))
     (uuid "85c3a9a1-9fd2-40e9-813a-64874b53ce66"))
-  (text "MANUAL STEP PULSE\nU1B — 556 Timer 2\nOUTPUT2: pin 9"
+  (text "MANUAL STEP PATH\nSTEP → U4A/U4B CD40106B debounce\nU1B 556 Timer 2 → OUTPUT2 pin 9"
     (at 51.5 91.0 0)
     (effects
       (font
@@ -703,4 +703,10 @@
         (size 1.27 1.27))
       (justify left))
     (uuid "cc9619e0-b06c-4a60-80be-7ae522c1c25d"))
-  (embedded_fonts no))
+  (embedded_fonts no))  (text "U4 debounce: 47k pull-up / 100n to GND / 1k series STEP switch. Two Schmitt inversions preserve active-LOW trigger polarity at U1 pin 8."
+    (at 148.5 112 0)
+    (effects
+      (font
+        (size 1.27 1.27)))
+    (uuid "3be2288c-f6aa-40e4-b86c-89931ca2fca7"))
+
