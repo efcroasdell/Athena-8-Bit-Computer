@@ -34,10 +34,32 @@ The core connections follow `../../breadboard/clock/wiring.md`, `../../../docs/d
 
 KiCad **10.0.3** loaded the schematic in the existing Athena hierarchy. ERC reports **0 errors and 1 warning**: CPU_CLK is connected only to U2 pin 11 because the receiving CPU circuit is outside this module. This warning remains visible; no check was disabled to hide it. See `exports/Clock-erc.txt`.
 
-The final PDF was visually inspected. These checks establish the drawing's connectivity and readability, not physical loading, timing or glitch-free operation. The journal contains 556 pin measurements through pin 14; the full selector/output path still requires the planned bench recheck.
+The final PDF was visually inspected. These checks establish the drawing's connectivity and readability, not physical loading, timing or glitch-free operation. The journal contains 556 pin measurements through pin 14. The selector/output path was rechecked on the bench on 19 September 2026 and behaved correctly; however, the KiCad sheet now requires revision to include the subsequently added CD40106B STEP-debounce stage.
 
 The original top-level schematic and existing project settings were retained. Journal content was not edited as part of this work.
 
 ## Logic diagram
 
 The **Clock logic** hierarchical sheet (`Clock-logic.kicad_sch`) shows source selection, mode memory, both HLT NAND gates and the Boolean relationships. `exports/Clock-logic.pdf` is its A4 preview. This sheet contains documentation graphics only and is excluded from the BOM, board and simulation. Its U1/U2/U3 annotations refer to the existing physical ICs on the Clock circuit sheet; it adds no duplicate parts or electrical nets.
+
+
+## 19 September 2026 as-built divergence
+
+The physical clock breadboard has advanced beyond the currently exported KiCad Clock sheet.
+
+The present as-built STEP path now includes a **CD40106BE RC + Schmitt-trigger debounce stage** ahead of U1 pin 8:
+
+- CD40106B pin 1 → 47 kΩ → +5 V;
+- CD40106B pin 1 → 100 nF → GND;
+- CD40106B pin 1 → 1 kΩ → STEP switch → GND;
+- CD40106B pin 2 → pin 3;
+- CD40106B pin 4 → U1 pin 8;
+- CD40106B pin 14 → +5 V;
+- CD40106B pin 7 → GND;
+- unused CD40106B inputs are held at defined logic levels.
+
+The previous direct 10 kΩ pull-up / STEP-switch connection at U1 pin 8 is therefore **superseded on the physical build**.
+
+This divergence is explicit and intentional in the documentation. The current KiCad schematic must not be treated as the final as-built clock record until the CD40106B stage is added and the exports/ERC are regenerated.
+
+Bench verification on 19 September 2026 established that the new conditioning stage produces a clean trigger at U1 pin 8 and one clean CPU clock pulse per deliberate STEP action. The RUN/MANUAL selector path was also rechecked through U3 pin 4, U2 pin 9 and U2 pin 11.
