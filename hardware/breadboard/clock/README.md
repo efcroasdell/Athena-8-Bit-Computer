@@ -15,7 +15,7 @@ The current implementation is intentionally compact but remains built from discr
 
 ## Current architecture
 
-The current clock uses three main ICs:
+The current clock uses four main ICs:
 
 | Device | Function in Athena |
 |---|---|
