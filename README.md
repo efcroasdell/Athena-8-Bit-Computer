@@ -33,3 +33,5 @@ Athena is the practical 8-bit computer build and its associated learning/documen
 The project prioritises understanding, observability, and verification. Measurements, scope traces, logic-analyser captures, photographs, and controlled experiments are treated as engineering evidence rather than incidental artefacts.
 
 Provisional ideas, confirmed decisions, superseded work, and failed experiments should remain distinguishable in the record rather than being silently overwritten.
+
+Athena should favour understandable and verifiable solutions, but it need not always favour the most conventional solution. Unusual, historically interesting or unexpected period-appropriate devices and architectures may be explored where they add educational value, observability or understanding. Novelty is not itself a requirement and must not displace electrical correctness or clear verification.
