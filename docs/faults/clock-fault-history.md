@@ -166,3 +166,95 @@ The individual-555 implementation has been superseded by the current dual-556 pl
 ## Status
 
 No unresolved fault currently prevents continued systematic verification of the 556. Verification is complete through pin 12; the next measurement is pin 13 (DISCHARGE2).
+
+
+## STEP contact chatter and Schmitt-trigger debounce — 19 September 2026
+
+### Symptom
+
+Logic-analyser captures made during manual stepping showed that a single intended STEP action could produce multiple CPU-clock transitions. This made the assumption "one button press = one Z80 T-state" unsafe.
+
+### Isolation by measurement
+
+The fault was traced backwards through the clock path rather than treated as a generic CPU problem.
+
+Observed sequence:
+
+1. DSLogic showed extra short CPU-clock events during manual stepping.
+2. Oscilloscope probing confirmed that the disturbance was real rather than only a logic-analyser threshold artefact.
+3. The disturbance was visible at 556 pin 9, the manual monostable output.
+4. Probing 556 pin 8 showed several rapid HIGH/LOW transitions around a STEP action.
+5. This established that the unwanted events were already present at the trigger input, upstream of the 556 timing function.
+
+A hand-held jumper was considered as a bypass test, but hand movement itself introduced contact chatter and therefore was not a sufficiently controlled discriminator.
+
+### Mechanical-switch comparison
+
+The original STEP switch was replaced temporarily with a small 6 mm tactile momentary switch.
+
+Result: the new switch was dramatically cleaner, but a retained DSLogic capture still contained at least one additional short clock event. The mechanical replacement therefore reduced the fault but did not provide the reliability required for CPU single-stepping.
+
+### Deduction
+
+The evidence supported the following causal model:
+
+mechanical contact bounce → repeated/slow trigger transitions → repeated 556 trigger activity → additional manual clock events → unreliable Z80 T-state stepping.
+
+The solution was therefore derived from the measured failure mechanism rather than copied from an existing computer design.
+
+### Alternatives investigated
+
+Before choosing the final implementation, the following hardware approaches were considered:
+
+- CD40106BE Schmitt-trigger inverter with RC input filtering;
+- CD4093BE Schmitt NAND logic;
+- comparator-based hysteresis using LM393, HA17393 or AN1319;
+- NAND SR-latch debouncing using an SPDT momentary switch;
+- 74LS123 monostable conditioning;
+- flip-flop-based conditioning;
+- modification of the existing 556 trigger network.
+
+The alternatives remain useful experiments, particularly the comparator approach because it would allow hysteresis thresholds to be calculated and measured directly.
+
+### Implemented correction
+
+A CD40106BE was added ahead of 556 pin 8.
+
+Current network:
+
+- CD40106B pin 1 → 47 kΩ → +5 V;
+- CD40106B pin 1 → 100 nF → GND;
+- CD40106B pin 1 → 1 kΩ → STEP switch → GND;
+- CD40106B pin 2 → pin 3;
+- CD40106B pin 4 → 556 pin 8;
+- pin 14 → +5 V;
+- pin 7 → GND;
+- unused CMOS inputs tied to GND.
+
+The previous direct 10 kΩ pull-up and mechanical switch connection at 556 pin 8 was removed.
+
+### Verification
+
+Oscilloscope observation showed:
+
+- the CD40106B pin-1 RC node making a controlled HIGH-to-LOW transition;
+- 556 pin 8 receiving a clean abrupt HIGH-to-LOW trigger with no visible chatter at the test timebase.
+
+A subsequent retained DSLogic capture showed one clean CPU clock pulse per deliberate STEP action and no short chatter bursts.
+
+### Selector-path recheck
+
+An apparent later observation suggested that STEP might still be reaching the CPU while RUN was selected. Because extensive probing and temporary wiring had been taking place, the complete propagation path was rechecked.
+
+Measured:
+
+- SN74LS157 pin 1: 0 V in MANUAL, approximately 3.6 V in RUN;
+- SN74LS157 pin 4: no STEP-correlated change in RUN;
+- SN7400 pin 9: no STEP-correlated change in RUN;
+- SN7400 pin 11: no STEP-correlated change in RUN.
+
+The anomaly could not be reproduced. Current evidence supports correct source selection. The earlier observation is retained as a transient debugging/probing artefact rather than silently erased.
+
+### Learning result
+
+This fault is a useful Athena example of evidence-led design. The circuit was not "fixed" by replacing parts at random. The unwanted CPU behaviour was traced to its source, alternative explanations were eliminated, a conditioning mechanism appropriate to the observed analogue behaviour was selected, and the correction was verified both locally and at the final CPU clock.
